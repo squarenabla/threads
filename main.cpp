@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 //        trd.setCondition(cv);
 //        trd.start();
 //    }
-    g_cv.wakeAll();
+    cv->wakeAll();
 
     return a.exec();
 }
