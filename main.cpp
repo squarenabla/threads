@@ -5,7 +5,7 @@
 
 //#include "globals.h"
 #include "threadworker.h"
-
+#include "waiter.h"
 
 
 
@@ -14,12 +14,12 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    qDebug()<< g_i;
+    //qDebug()<< g_i;
 
 
-    ThreadWorker trd(NULL,0);
+    ThreadWorker trd(0,0);
 
-    ThreadWorker trd2(NULL,1);
+    ThreadWorker trd2(0,1);
 
      //ThreadWorker::QWaitCondition *cv = new QWaitCondition();
 
@@ -27,12 +27,15 @@ int main(int argc, char *argv[])
     trd.start();
     trd2.start();
 
+    Waiter waiter;
 //    for(int i=0; i<10; ++i){
 //        ThreadWorker trd(NULL,i);
 //        trd.setCondition(cv);
 //        trd.start();
 //    }
-    cv->wakeAll();
+    waiter.start();
+
+    //ThreadWorker::cv->wakeAll();
 
     return a.exec();
 }

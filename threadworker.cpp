@@ -1,6 +1,6 @@
 #include "threadworker.h"
 
-ThreadWorker::QWaitCondition *cv = new QWaitCondition();
+QWaitCondition* ThreadWorker::cv = new QWaitCondition();
 
 ThreadWorker::ThreadWorker(QObject *parent, const int &_id) :
     QThread(parent)
@@ -14,13 +14,16 @@ ThreadWorker::ThreadWorker(QObject *parent, const int &_id) :
 //}
 
 void ThreadWorker::run(){
+    qDebug()<<"Worker "<<id<<" locks";
     //forever{
-        mutex.lock();
+        g_mutex.lock();
+        g_counter++;
+        g_cv.wait(&g_mutex);
+        g_counter--;
+        g_mutex.unlock();
 
-        cv->wait(&mutex);
         for(int i=0; i<1000; ++i)
             qDebug()<<id<<" "<<i;
-        mutex.unlock();
     //}
     return;
 }

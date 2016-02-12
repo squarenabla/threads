@@ -1,5 +1,6 @@
 #include "globals.h"
 
 QWaitCondition g_cv;
+QMutex g_mutex;
 
-int g_i = 100500;
+int g_counter = 0;

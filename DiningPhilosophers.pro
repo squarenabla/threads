@@ -17,8 +17,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     threadworker.cpp \
-    globals.cpp
+    globals.cpp \
+    waiter.cpp
 
 HEADERS += \
     threadworker.h \
-    globals.h
+    globals.h \
+    waiter.h
