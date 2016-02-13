@@ -20,7 +20,7 @@ public:
    // void setCondition(QWaitCondition *_cv);
     static QWaitCondition *cv;
 signals:
-
+    void statusChanged(const quint16 &id, const QString str);
 public slots:
 
 

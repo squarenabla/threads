@@ -1,6 +1,7 @@
 #include "waiter.h"
 
 QVector<bool> Waiter::forks(FORK_NUM, true);
+QVector<QString> Waiter::thinkerStatus(FORK_NUM, "Arrives");
 
 Waiter::Waiter(QObject *parent) :
     QThread(parent)
@@ -39,4 +40,12 @@ void Waiter::finishRequest(const int &lfork, const int &rfork){
     g_cv.wakeAll();
     g_mutex.unlock();
     return;
+}
+
+void Waiter::changeStatus(const quint16 &id, const QString str){
+    thinkerStatus[id] = str;
+    QProcess::execute("clear");
+    for(int i=0; i<FORK_NUM; ++i){
+        qDebug()<<"Thinker "<<i<<" "<<thinkerStatus[i];
+    }
 }

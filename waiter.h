@@ -3,6 +3,9 @@
 
 #include <QThread>
 #include <QDebug>
+#include <QProcess>
+
+#include <QString>
 
 #include "globals.h"
 
@@ -17,9 +20,11 @@ public:
 signals:
 
 public slots:
-
+    void changeStatus(const quint16 &id, const QString str);
 private:
     static QVector<bool> forks;
+   // static QMutex mutex;
+    static QVector<QString> thinkerStatus;
 };
 
 #endif // WAITER_H

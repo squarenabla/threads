@@ -35,6 +35,7 @@ void ThreadWorker::run(){
     for(int i=0; i<DINNERS_NUM; ++i){
         p_think();
         while(!Waiter::hungryRequest(id, id+1)){
+            emit statusChanged(id, "Waits");
             g_mutex.lock();
             g_cv.wait(&g_mutex);
             g_mutex.unlock();
@@ -46,13 +47,15 @@ void ThreadWorker::run(){
 }
 
 void ThreadWorker::p_think(){
-    qDebug()<<"Philosopher "<<id<<" thinks";
+    //qDebug()<<"Philosopher "<<id<<" thinks";
+    emit statusChanged(id, "Thinks");
     qsrand((uint)id);
     sleep(qrand()%MAX_SEC);
 }
 
 void ThreadWorker::p_eat(){
-    qDebug()<<"Philosopher "<<id<<" eats";
+    //qDebug()<<"Philosopher "<<id<<" eats";
+    emit statusChanged(id, "Eats");
     qsrand((uint)id);
     sleep(qrand()%MAX_SEC);
 }
