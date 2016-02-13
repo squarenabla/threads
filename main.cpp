@@ -14,18 +14,6 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    //qDebug()<< g_i;
-
-
-//    ThreadWorker trd(0,0);
-
-//    ThreadWorker trd2(0,1);
-
-     //ThreadWorker::QWaitCondition *cv = new QWaitCondition();
-
-
-//    trd.start();
-//    trd2.start();
 
     Waiter waiter;
     waiter.start();
